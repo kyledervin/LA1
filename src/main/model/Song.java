@@ -5,6 +5,8 @@
  * Course: CSC 335 Spring 2025
  */
 
+package model;
+
  public class Song {
     private String title;
     private String artist;
