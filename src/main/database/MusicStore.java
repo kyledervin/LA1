@@ -126,4 +126,105 @@
    
          return null;
      }    
- }
+
+    /**
+     * This helper method searches for albums based on title or artist.
+     * 
+     * Parameters: query (type: string) -- the search query case-insensitive, searchByTitle (type: boolean) -- if 
+     * true searches by title; otherwise, searches by artist
+     * 
+     * Returns: a list of matching albums
+     */
+    private ArrayList<Album> searchAlbums(String query, boolean searchByTitle) {
+        ArrayList<Album> matches = new ArrayList<>();
+        String lowerQuery = query.toLowerCase();
+        for (Album album : albums) {
+            String fieldToCheck = searchByTitle ? album.getTitle() : album.getArtist();
+            if (fieldToCheck.toLowerCase().contains(lowerQuery)) {
+                matches.add(album);
+            }
+        }
+        return matches;
+    }
+
+    /**
+     * This method searches for albums by title case-insensitive.
+     *
+     * Parameters: title (type: string) -- a substring to search for in album titles
+     * 
+     * Returns: a list of matching albums
+     */
+    public ArrayList<Album> searchAlbumByTitle(String title) {
+        return searchAlbums(title, true);
+    }
+
+    /**
+     * This method searches for albums by artist case-insensitive.
+     *
+     * Parameters: artist (type: string) -- a substring to search for in artist names
+     * 
+     * Returns: a list of matching albums
+     */
+    public ArrayList<Album> searchAlbumByArtist(String artist) {
+        return searchAlbums(artist, false);
+    }
+
+    /**
+     * This helper method searches for songs based on title or artist.
+     * 
+     * Parameters: query (type: string) -- the search query case-insensitive, searchByTitle (type: boolean) -- if 
+     * true searches by title; otherwise, searches by artist
+     * 
+     * Returns: a list of matching songs
+     */
+    private ArrayList<Song> searchSongs(String query, boolean searchByTitle) {
+        ArrayList<Song> matches = new ArrayList<>();
+        String lowerQuery = query.toLowerCase();
+        for (Album album : albums) {
+            if (!searchByTitle && !album.getArtist().toLowerCase().contains(lowerQuery)) {
+                continue;
+            }
+            for (Song song : album.getSongs()) {
+                if (searchByTitle && song.getTitle().toLowerCase().contains(lowerQuery)) {
+                    matches.add(song);
+                } else if (!searchByTitle) {
+                    matches.add(song);
+                }
+            }
+        }
+        return matches;
+    }
+
+    /**
+     * This method searches for songs by title case-insensitive.
+     *
+     * Parameters: title (type: string) -- a substring to search for in song titles
+     * 
+     * Returns: A list of matching songs
+     */
+    public ArrayList<Song> searchSongByTitle(String title) {
+        return searchSongs(title, true);
+    }
+
+    /**
+     * This method searches for songs by artist case-insensitive.
+     *
+     * Parameters: artist (type: string) -- a substring to search for in artist names
+     * 
+     * Returns: A list of matching songs
+     */
+    public ArrayList<Song> searchSongByArtist(String artist) {
+        return searchSongs(artist, false);
+    }
+
+    /**
+     * This method returns a copy of the list of all albums. 
+     * 
+     * Parameters: none 
+     * 
+     * Returns: A new copy of the album list for good encapsulation
+     */
+    public ArrayList<Album> getAllAlbums() {
+        return new ArrayList<>(albums);
+    }
+}
