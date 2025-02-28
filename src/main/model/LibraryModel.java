@@ -313,4 +313,42 @@
             playlist.displayPlaylist();
         }
     }
+
+    /*
+     * Toggles the favorite status of a song in the user's library.
+     * 
+     * Parameters: songTitle (type: String) -- title of the song to toggle,
+     * artist (type: String) -- artist of the song to toggle
+     * 
+     * Returns: boolean -- true if toggled successfully, false otherwise
+     */
+    public boolean toggleFavoriteSong(String songTitle, String artist) {
+        for (Song s : userSongs) {
+            if (s.getTitle().equalsIgnoreCase(songTitle) 
+                && s.getArtist().equalsIgnoreCase(artist)) {
+                s.setFavorite(!s.isFavorite());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+     * Rates a song in the user's library.
+     * 
+     * Parameters: songTitle (type: String) -- title of the song to rate,
+     * artist (type: String) -- artist of the song to rate, rating (type: int) -- rating to assign to the song
+     * 
+     * Returns: boolean -- true if rated successfully, false otherwise
+     */
+    public boolean rateSong(String songTitle, String artist, int rating) {
+        for (Song s : userSongs) {
+            if (s.getTitle().equalsIgnoreCase(songTitle)
+                && s.getArtist().equalsIgnoreCase(artist)) {
+                s.setRating(rating); 
+                return true;
+            }
+        }
+        return false;
+    }  
  }
