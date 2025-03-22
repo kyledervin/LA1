@@ -22,7 +22,7 @@ public class Album {
         this.artist = artist;
         this.genre = genre;
         this.year = year;
-        this.songs = songs;
+        this.songs = new ArrayList<>(songs); // copy is stored not the reference
     }
 
     public String getTitle() {
@@ -49,5 +49,4 @@ public class Album {
     public String toString() {
         return title + " (" + year + ") by " + artist + " [" + genre + "]";
     }
-
 }

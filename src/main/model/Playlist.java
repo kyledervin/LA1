@@ -34,18 +34,19 @@ public class Playlist {
         songs.remove(s);
     }
 
-    public String displayPlaylist() {
-        // Build a string describing the playlist contents
-        StringBuilder sb = new StringBuilder();
-        sb.append("Playlist: ").append(name).append("\n");
-        if (songs.isEmpty()) {
-            sb.append("   (Empty)\n");
-        } else {
-            for (int i = 0; i < songs.size(); i++) {
-                sb.append((i + 1)).append(". ").append(songs.get(i)).append("\n");
-            }
+    public void displayPlaylist() {
+    	System.out.println("Playlist: " + name);
+        for (Song song : songs) {
+            System.out.println("   " + song.getTitle() + " by " + song.getArtist());
         }
-        return sb.toString();
     }
-
+    
+    /*
+     * Shuffles the songs in this playlist. Using approach described in Piazza.
+     * 
+     * Returns: none
+     */
+    public void shuffle() {
+        Collections.shuffle(songs);
+    }
 }
