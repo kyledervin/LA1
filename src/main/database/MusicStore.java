@@ -227,4 +227,20 @@
     public ArrayList<Album> getAllAlbums() {
         return new ArrayList<>(albums);
     }
+
+    /**
+     * This method returns the album object that an input song is in.
+     * 
+     * Parameters: none 
+     * 
+     * Returns: An album object if it exists for the input song, else null.
+     */
+    public Album getAlbumForSong(Song song) {
+        for (Album album : albums) {
+            if (album.getSongs().contains(song)) {
+                return album;
+            }
+        }
+        return null;
+    }
 }
