@@ -82,5 +82,18 @@ public class MusicStoreTest {
         assertTrue(someoneLikeYou);
     }
 
+    @Test
+    public void testGetAlbumForSong() {
+        ArrayList<Song> matches = store.searchSongByTitle("Someone Like You");
+        assertFalse(matches.isEmpty());
+
+        Song song = matches.get(0);
+        Album album = store.getAlbumForSong(song);
+
+        assertNotNull(album);
+        assertEquals("21", album.getTitle());
+        assertEquals("Adele", album.getArtist());
+    }
+
     
 }
